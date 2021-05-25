@@ -1,5 +1,5 @@
 resource "aws_security_group" "example-instance" {
-  name        = "allow-ssh"
+  name        = "SSH-Conn"
   description = "security group that allows ssh and all egress traffic"
   ingress {
     from_port   = 22

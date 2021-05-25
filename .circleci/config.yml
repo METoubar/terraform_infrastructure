@@ -29,10 +29,11 @@ jobs:
           command: |
             aws ec2 describe-instances \
             --query 'Reservations[*].Instances[*].PublicIpAddress' \
-            --output text >> inventory
+            --output text >> ansible/inventory
       - run:
           name: Configure the server
           command: |
+            cd ansible/
             ansible-playbook playbook.yml -i inventory
 workflows:
   my_workflow:

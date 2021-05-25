@@ -7,7 +7,7 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Ensure backend infrastructure exist
+          name: Ensure backend infrastructure exist using Terraform
           command: |
             terraform init
             terraform apply

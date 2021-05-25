@@ -1,9 +1,9 @@
 variable "PATH_TO_PRIVATE_KEY" {
-  default = "ansiblekey"
+  default = "mykey"
 }
 
 variable "PATH_TO_PUBLIC_KEY" {
-  default = "ansiblekey.pub"
+  default = "mykey.pub"
 }
 
 variable "AWS_REGION" {

@@ -1,0 +1,16 @@
+version: 2.1
+
+jobs:
+  create_infrastructure:
+    docker:
+      - image: hashicorp/terraform
+    steps:
+      - checkout
+      - run:
+          name: Ensure backend infrastructure exist
+          command: |
+            terraform apply
+workflows:
+  my_workflow:
+    jobs:
+      - create_infrastructure

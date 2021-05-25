@@ -7,7 +7,7 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Ensure backend infrastructure exist using Terraform
+          name: Ensure backend IS exist using Terraform
           command: |
             cd terraform/
             terraform init

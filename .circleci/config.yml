@@ -11,7 +11,33 @@ jobs:
           command: |
             terraform init
             terraform apply -auto-approve
+
+  configuration_managment:
+    docker:
+      - image: python:3.7-alpine3.11
+    steps:
+      - checkout
+      - add_ssh_keys:
+          fingerprints:
+            - "65:d7:73:7b:47:67:12:74:e5:28:9a:cf:d6:e5:47:aa"
+      - run:
+          name: Install dependencies
+          command: |
+            apk add --update ansible
+      - run:
+          name: retreive the public DNS for the EC2 instance
+          command: |
+            aws ec2 describe-instances \
+            --query 'Reservations[*].Instances[*].PublicIpAddress' \
+            --output text >> inventory
+      - run:
+          name: Configure the server
+          command: |
+            ansible-playbook playbook.yml -i inventory
 workflows:
   my_workflow:
     jobs:
       - create_infrastructure
+      - configuration_managment:
+          requires:
+            - create_infrastructure
